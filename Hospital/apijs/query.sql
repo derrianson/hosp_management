@@ -1,1 +1,0 @@
-insert into login (username, password, isadmin) values ();
