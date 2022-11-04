@@ -12,11 +12,11 @@ const city ="SELECT distinct(cityname) FROM  hospital;";
 
 const updateBed ="UPDATE bed SET isavailable=false WHERE bedid =($1) returning *";
 
-const updatePatient = "INSERT INTO patient (userid,hospitalid,wardid,bedid,patientname,patientage,contact) VALUES(($1),($2),($3),($4),($5),($6),($7)) returning *;";
+//const updatePatient = "INSERT INTO patient (userid,hospitalid,wardid,bedid,patientname,patientage,contact) VALUES(($1),($2),($3),($4),($5),($6),($7)) returning *;";
 
 const bookBed ="INSERT INTO bill (ptientid,dateofjoining) VALUES(($1),($2));";
 
-
+const insertPatient="INSERT INTO patients1 (patientname,patientage,email) VALUES(($1),($2),($3)) returning *;";
 
 
 
@@ -30,5 +30,6 @@ module.exports = {
   bed,
   city,
   updateBed,
-  updatePatient
+  //updatePatient,
+  insertPatient
 };

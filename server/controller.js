@@ -33,19 +33,36 @@ const getCity = (req, res) => {
   });
 };
 
+// const getHosp = (req, res) => {
+//   console.log("hii");
+//   console.log("req",req.fields.city)
+//   pool.query(queries.hosp, [req.fields.city], (error, results) => {
+//     if (error) throw error;
+//     else {
+//         //console.log(results.rows);
+//       res.send(results.rows);
+//     }
+//   });
+// };
+
 const getHosp = (req, res) => {
-  console.log("hii");
-  console.log("req",req.body)
-  // pool.query(queries.hosp, [req.fields.city], (error, results) => {
-  //   if (error) throw error;
-  //   else {
-  //     res.send(results.rows);
-  //   }
-  // });
+
+  pool.query(queries.hosp, [req.params.selcity], (error, results) => {
+
+    if (error) throw error;
+
+    else {
+
+      res.send(results.rows);
+
+    }
+
+  });
+
 };
 
 const getWard = (req, res) => {
-  pool.query(queries.ward, [req.fields.hospid], (error, results) => {
+  pool.query(queries.ward, [req.params.sel_hospid], (error, results) => {
     if (error) throw error;
     else {
       res.send(results.rows);
@@ -71,27 +88,43 @@ const selectBed = (req, res) => {
   });
 };
 
-const updatePatient = (req, res) => {
-  pool.query(
-    queries.updatePatient,
-    [
-      req.fields.userid,
-      req.fields.hospid,
-      req.fields.wardid,
-      req.fields.bedid,
-      req.fields.patientname,
-      req.fields.patientage,
-      req.fields.contact,
-    ],
-    (error, results) => {
-      // if (error) throw error;
-      // else {
-      res.send(results.rows);
-      console.log(results);
-      // }
-    }
-  );
-};
+// const updatePatient = (req, res) => {
+//   console.log(req.body)
+//   let {userid,hospid,wardid,bedid,name,age,contactno}=req.body;
+//   console.log("hiii",userid)
+//   pool.query(queries.updatePatient,[userid,hospid,wardid,bedid,name,age,contactno],(error, results) => {
+//     if (error) throw error;
+//    //res.send(200).send("patient added succesfully")
+//    res.json({
+//     "boolean":true
+//    })
+
+//   })
+// }
+    // queries.updatePatient,
+    // [
+    //   req.params.userid,
+    //   req.params.hospid,
+    //   req.params.wardid,
+    //   req.params.bedid,
+    //   req.params.patientname,
+    //   req.params.patientage,
+    //   req.params.contact,
+    // ],
+
+
+    const insertPatient = (req, res) => {
+      let {patientname,patientage,email}=req.body;
+      console.log(req.body)
+      pool.query(queries.insertPatient,[patientname,patientage,email], (error, results) => {
+        if (error) throw error;
+        else {
+          console.log(req.body);
+          res.staus(200).json(results.rows);
+        }
+      });
+    };
+
 
 const bookBed = (req, res) => {
   pool.query(
@@ -123,7 +156,8 @@ module.exports = {
   getBed,
   getCity,
   selectBed,
-  updatePatient,
+  //updatePatient,
   bookBed,
   viewBooking,
+  insertPatient,
 };
