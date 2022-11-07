@@ -1,0 +1,23 @@
+.loginContainer{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content:baseline;
+    color: white;
+    font-size: large;
+    background-image: linear-gradient(79deg, #0c13e7, #05d856ac 48%, #06fd964d);
+}
+form{
+    display: column;
+    justify-content: center;
+}
+label{
+color: rgb(216, 29, 57);
+font-size: larger;
+}
+input{
+    text-align: center;
+}
